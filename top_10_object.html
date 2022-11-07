@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Top 10 Questions on Object</title>
+</head>
+
+<body>
+    <script>
+        //Task description: Write a method that verifies an argument is a plain object, not an array or null
+        //Expected Result: True if object is plain, false otherwise. 
+        //({ a: 1 }) => true, 
+        //([1, 2, 3]) => false
+        const isPlainObject = (element) => {
+            return !Array.isArray(element) && typeof (element) == "object" && element != null;
+        };
+        const data = { a: 1 };
+        const a2 = [1, 2, 3];
+        function fun() { }
+        console.log(isPlainObject(data)); // true
+        /////////////////////////////////////////////////////////////////////////////////////////////////
+
+        //Expected Result: [['a', 1], ['b', 2]] => { a: 1, b: 2 } 
+        let arr = [['a', 1], ['b', 2]];
+        const fromPairs = (array) => array.reduce((acc, value) => {
+            if (Array.isArray(value)) {
+                acc[value[0]] = value[1];
+            }
+            return acc;
+        }, {});
+
+        console.log(fromPairs(arr));
+        /////////////////////////////////////////////////////////////////////////////////////////////////
+
+        //Task description: Write a method that returns a new object without provided properties
+        // Expected Result: ({ a: 1, b: 2 }, 'b') => { a: 1 }
+
+        const input = { a: 1, b: 2, c: 3 };
+
+        const without = (object, ...args) => {
+            const temp = { ...object };
+
+            args.forEach((arg) => {
+                delete temp[arg];
+            });
+
+            return temp;
+        };
+
+        console.log(without(input, 'b'))
+        /////////////////////////////////////////////////////////////////////////////////////////////////
+
+        // Task description: Write a method that makes a shallow check is object empty 
+        //  Expected Result: ({}) => true, ({ a: undefined }) => true, 
+        // ({ a: 1 }) => false 
+        //  Empty values: '', null, NaN, undefined 
+
+        const isEmpty = (object) => {
+            const objectKeys = Object.keys(object);
+            /* if (objectKeys.length === 0) {
+                return true;
+            }
+
+            return !objectKeys.filter((key) => object[key] || object[key] === 0 || object[key] === false).length;
+        }; */
+
+            if (objectKeys.length === 0) {
+                return true;
+            }
+            let result;
+            for (let i = 0; i < objectKeys.length; i += 1) {
+                const value = object[objectKeys[i]];
+
+                if (typeof value === 'boolean' || (typeof value === 'number' && !Number.isNaN(value)) || (typeof value === 'string' && value !== '')) {
+                    result = false;
+                    break;
+                }
+                result = true;
+            }
+
+            return result;
+        }
+        const data1 = { a: 1, b: undefined };
+        const data2 = { a: undefined };
+        console.log(isEmpty(data1)); // false
+        console.log(isEmpty(data2)); // true
+
+       let a=5,b='5';
+       console.log(":::::::::",a===b)
+       </script>
+</body>
+
+</html>

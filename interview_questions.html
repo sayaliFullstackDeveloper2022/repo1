@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Interview Questions</title>
+</head>
+<body>
+    
+
+<script>
+    //18. cutting array length
+    var arr = [3, 4, 6, 1, 2, 4, 3];
+    /* console.log("length::::"+arr.length+"-----"+arr)
+    arr.length=4;
+    console.log("length::::"+arr.length+"-----"+arr)*/
+
+
+    //19. sum of array elements
+    let sum = arr.reduce((a, b) => a + b)
+    console.log("SUM::::" + sum)
+
+    //20. remove duplicates
+    let unique = new Set(arr);
+    console.log("arrat::" + [...unique])  //[...unique] this destructuring
+
+    //21. swap using destructuring
+    let a = 5, b = 20;
+    [a, b] = [b, a];
+    console.log("a::::" + a + "  b:::" + b)
+
+    //22 closure
+    let var1 = () => {
+        let A;
+        return {
+            setA: (num) => A = num,
+            getA: () => A
+        }
+    }
+
+    let result = var1();
+    result.setA(10);
+    console.log("A:::::", result.getA());
+
+    //17 callback
+    let setValues = (num1, num2, callback_fun) => {
+        let A = num1, B = num2;
+        return callback_fun(A, B);
+    }
+    let printSum = (A, B) => A + B;
+
+    let x = setValues(10, 20, printSum);
+    console.log("PRINT SUM:::::::::", x)
+
+    // call()
+    let demo = {
+        p: 10,
+        q: 20,
+        substraction: () => {
+            return this.q - this.p;
+        }
+    }
+
+    function multi() {
+        console.log("Multiplication:::::::", this.p * this.q);
+    }
+
+    function addition(a, b) {
+        console.log("Sum:::::::", this.p + this.q + a + b);
+    }
+
+
+    multi.call(demo);
+
+
+    //  apply()
+
+    addition.apply(demo, [1, 2])
+
+
+    // bind()
+    let sub = demo.substraction.bind(demo);
+    console.log("Substraction::::", sub());
+
+
+
+    //console.log(['s','a','y']+['a','l','i'])
+
+    // to call person() must use 'new' //constructor function
+    function Person(name) {
+        if (!new.target) {
+            throw "must use new operator with Person";
+        }
+        this.name = name;
+        //console.log(name)
+    }
+    new Person("sayali")           // sayali
+    //Person("siya")            // throws an error
+</script>
+</body>
+</html>
